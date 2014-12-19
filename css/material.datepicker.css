@@ -1,0 +1,10 @@
+.material-datepicker {
+	position: absolute;
+	height: 500px;
+	width: 300px;
+	border:1px solid gray;
+}
+
+.material-datepicker.hide {
+	display: none;
+}
