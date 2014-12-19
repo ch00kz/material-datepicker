@@ -3,6 +3,8 @@
 	height: 500px;
 	width: 300px;
 	border:1px solid gray;
+	background: rgba(0,0,0,0.5);
+	z-index: 1000000;
 }
 
 .material-datepicker.hide {
