@@ -79,6 +79,15 @@ a.next {
 	top: 11px;
 	right: 62px;
 }
+
+a.close {
+	float: right;
+	padding: 18px 30px;
+	color: #009688;
+	font-weight: 600;
+	cursor: pointer;
+}
+
 section.middle-date > .date {
 	font-size: 62px;
 	height: 39px;
