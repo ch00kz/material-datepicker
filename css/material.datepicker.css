@@ -1,12 +1,87 @@
+@font-face {
+	font-family: SourceSansPro;
+	src: url('../fonts/SourceSansPro-Regular.otf');
+}
+
+@font-face {
+	font-family: SourceSansPro;
+	src: url('../fonts/SourceSansPro-Bold.otf');
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: SourceSansPro;
+	src: url('../fonts/SourceSansPro-Light.otf');
+	font-weight: 300;
+}
+
 .material-datepicker {
+	font-family: SourceSansPro;
 	position: absolute;
 	height: 500px;
 	width: 300px;
 	border:1px solid gray;
-	background: rgba(0,0,0,0.5);
 	z-index: 1000000;
 }
 
 .material-datepicker.hide {
 	display: none;
+}
+
+section.top-day {
+	text-align: center;
+	font-weight: 300;
+	background-color: #007366;
+	height: 35px;
+	line-height: 35px;
+	color: #fff;
+}
+
+section.middle-date {
+	background-color: #009688;
+	height: 140px;
+	color: #fff;
+	text-align: center;
+}
+
+section.middle-date > .month {
+	padding: 8px 0px;
+	text-transform: uppercase;
+	font-size: 28px
+}
+section.middle-date > .date {
+	font-size: 62px;
+	height: 39px;
+	margin-top: -23px;
+	margin-bottom: 28px;
+}
+section.middle-date > .year {
+	font-size: 25px;
+	font-weight: 400;
+	color: #8ACFC8;
+}
+
+section.calendar {
+
+}
+
+section.calendar > .title {
+	padding:7px;
+ 	text-align: center;
+ 	font-size: 16px;
+}
+
+section.calendar .days {
+
+}
+
+section.calendar .day {
+	padding: 10px 0px;
+	display: inline-block;
+	width: 40px;
+	text-align: center;
+}
+
+section.calendar a.day {
+	cursor: pointer;
 }
