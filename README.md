@@ -34,6 +34,7 @@ Datepicker (screenshot below) inspired by material design's pickers (http://www.
 ##To Do
 * Specification of date format
 * Time Picker
+* Refine design
 
 
 
