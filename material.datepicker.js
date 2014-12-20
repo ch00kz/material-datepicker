@@ -62,7 +62,7 @@ function DatePicker(field) {
 				var date = new Date(self.viewingMonth() + " " + day + " " + self.viewingYear());
 				self.datePickerValue(new Date(date));
 				var year = self.viewingYear();
-				var month = self.viewingMonth() + 1;
+				var month = self.viewingMonth();
 				var dateString = year + "-" + month + "-" + day;
 				$(self.field).val(dateString);
 			}
