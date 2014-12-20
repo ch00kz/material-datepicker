@@ -5,11 +5,11 @@ Datepicker (screenshot below) inspired by material design's pickers (http://www.
 
 ![alt tag](https://raw.githubusercontent.com/ch00kz/material-datepicker/master/screenshots/datepicker.png)
 
-Dependencies
+##Dependencies
 * JQuery
 * KnockoutJS
 
-#Use
+##Use
 
 * Add Dependencies along with material-datepicker js and css.
 
@@ -32,7 +32,7 @@ Dependencies
   var setupPicker = new DatePicker( $('input')[0] );
 ```
 
-#To Do
+##To Do
 * Specification of date format
 * Time Picker
 
