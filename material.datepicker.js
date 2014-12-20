@@ -65,7 +65,6 @@ function DatePicker(field) {
 				var year = self.viewingYear();
 				var month = self.viewingMonth() + 1;
 				var dateString = year + "-" + month + "-" + day;
-				console.log(dateString);
 				$(self.field).val(dateString);
 			}
 		};
@@ -139,7 +138,6 @@ function DatePicker(field) {
 	    	var monthNum = self.viewingMonth();
 	    	var year = self.viewingYear();
 	    	var month = new Month(monthNum, year);
-	    	console.log(month);
 	    	var dayToNum = {
 	    		"Sunday": 0,
 	    		"Monday": 1,
