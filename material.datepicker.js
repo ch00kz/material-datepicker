@@ -42,8 +42,6 @@ function DatePicker(field) {
 	picker.css('top', offsetTop);
 	picker.css('left', offsetLeft);
 
-
-
 	function AppViewModel(field, picker) {
 		var self = this;
 
