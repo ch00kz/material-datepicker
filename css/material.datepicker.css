@@ -11,8 +11,19 @@
 
 @font-face {
 	font-family: SourceSansPro;
+	src: url('../fonts/SourceSansPro-Semibold.otf');
+	font-weight: 600;
+}
+
+@font-face {
+	font-family: SourceSansPro;
 	src: url('../fonts/SourceSansPro-Light.otf');
 	font-weight: 300;
+}
+
+@font-face {
+	font-family: FontAwesome;
+	src: url('../fonts/FontAwesome.otf');
 }
 
 .material-datepicker {
@@ -42,12 +53,32 @@ section.middle-date {
 	height: 140px;
 	color: #fff;
 	text-align: center;
+	position: relative;
 }
 
 section.middle-date > .month {
 	padding: 8px 0px;
 	text-transform: uppercase;
 	font-size: 28px
+}
+
+a.control {
+	font-family: FontAwesome;
+	color: #000;
+	font-size: 15px;
+	font-weight: 300;
+	position: absolute;
+	cursor: pointer;
+}
+
+a.prev {
+	top: 11px;
+	left: 62px;
+}
+
+a.next {
+	top: 11px;
+	right: 62px;
 }
 section.middle-date > .date {
 	font-size: 62px;
@@ -62,7 +93,7 @@ section.middle-date > .year {
 }
 
 section.calendar {
-
+	position: relative;
 }
 
 section.calendar > .title {
@@ -80,6 +111,17 @@ section.calendar .day {
 	display: inline-block;
 	width: 40px;
 	text-align: center;
+}
+
+section.calendar .day.today {
+	color: #009688;
+	font-weight: 600;
+}
+
+section.calendar .day.selected {
+	border-radius: 20px;
+	background-color: #009688;
+	color: #fff;
 }
 
 section.calendar a.day {
