@@ -29,7 +29,6 @@
 .material-datepicker {
 	font-family: SourceSansPro;
 	position: absolute;
-	height: 500px;
 	width: 300px;
 	border:1px solid gray;
 	z-index: 1000000;
