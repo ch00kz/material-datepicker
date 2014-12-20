@@ -1,5 +1,4 @@
-material-datepicker (incomplete)
-===================
+##material-datepicker
 
 Datepicker (screenshot below) inspired by material design's pickers (http://www.google.com/design/spec/components/pickers.html) 
 
