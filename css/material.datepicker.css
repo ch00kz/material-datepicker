@@ -1,23 +1,23 @@
 @font-face {
-	font-family: SourceSansPro;
-	src: url('../fonts/SourceSansPro-Regular.otf');
+	font-family: Roboto;
+	src: url('../fonts/Roboto-Regular.ttf');
 }
 
 @font-face {
-	font-family: SourceSansPro;
-	src: url('../fonts/SourceSansPro-Bold.otf');
+	font-family: Roboto;
+	src: url('../fonts/Roboto-Bold.ttf');
 	font-weight: bold;
 }
 
 @font-face {
-	font-family: SourceSansPro;
-	src: url('../fonts/SourceSansPro-Semibold.otf');
+	font-family: Roboto;
+	src: url('../fonts/Roboto-Semibold.ttf');
 	font-weight: 600;
 }
 
 @font-face {
-	font-family: SourceSansPro;
-	src: url('../fonts/SourceSansPro-Light.otf');
+	font-family: Roboto;
+	src: url('../fonts/Roboto-Light.ttf');
 	font-weight: 300;
 }
 
@@ -27,9 +27,9 @@
 }
 
 .material-datepicker {
-	font-family: SourceSansPro;
+	font-family: Roboto;
 	position: absolute;
-	width: 300px;
+	width: 280px;
 	border:1px solid gray;
 	z-index: 1000000;
 }
@@ -41,15 +41,16 @@
 section.top-day {
 	text-align: center;
 	font-weight: 300;
+	font-size: 14px;
 	background-color: #007366;
-	height: 35px;
-	line-height: 35px;
+	height: 32px;
+	line-height: 32px;
 	color: #fff;
 }
 
 section.middle-date {
 	background-color: #009688;
-	height: 140px;
+	height: 135px;
 	color: #fff;
 	text-align: center;
 	position: relative;
@@ -58,46 +59,41 @@ section.middle-date {
 section.middle-date > .month {
 	padding: 8px 0px;
 	text-transform: uppercase;
-	font-size: 28px
+	font-size: 22px
+}
+section.middle-date > .date {
+	font-size: 55px;
+	height: 39px;
+	margin-top: -10px;
+	margin-bottom: 24px;
+}
+section.middle-date > .year {
+	font-size: 26px;
+	font-weight: 400;
+	color: #8ACFC8;
 }
 
 a.control {
 	font-family: FontAwesome;
-	color: #000;
+	color: #009688;;
 	font-size: 15px;
 	font-weight: 300;
 	position: absolute;
 	cursor: pointer;
+	top: 7px;
 }
-
 a.prev {
-	top: 11px;
 	left: 62px;
 }
-
 a.next {
-	top: 11px;
 	right: 62px;
 }
 
 a.close {
 	float: right;
-	padding: 18px 30px;
+	margin: 7px 20px 13px 0px;
 	color: #009688;
-	font-weight: 600;
 	cursor: pointer;
-}
-
-section.middle-date > .date {
-	font-size: 62px;
-	height: 39px;
-	margin-top: -23px;
-	margin-bottom: 28px;
-}
-section.middle-date > .year {
-	font-size: 25px;
-	font-weight: 400;
-	color: #8ACFC8;
 }
 
 section.calendar {
@@ -105,29 +101,37 @@ section.calendar {
 }
 
 section.calendar > .title {
-	padding:7px;
+	margin-top: 8px;
+	padding: 7px;
  	text-align: center;
- 	font-size: 16px;
+ 	font-size: 14px;
 }
 
-section.calendar .days {
+section.calendar .days, section.calendar .headings  {
+	width: 250px;
+	margin: auto;
+}
 
+section.calendar .day.heading {
+	color: grey;
+	font-weight: 400;
 }
 
 section.calendar .day {
-	padding: 10px 0px;
+	font-size: 12px;
 	display: inline-block;
-	width: 40px;
+	width: 32px;
+	line-height: 32px;
 	text-align: center;
+	font-weight: 300;
 }
 
 section.calendar .day.today {
 	color: #009688;
-	font-weight: 600;
 }
 
 section.calendar .day.selected {
-	border-radius: 20px;
+	border-radius: 40px;
 	background-color: #009688;
 	color: #fff;
 }
