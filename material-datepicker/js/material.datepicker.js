@@ -10,7 +10,7 @@ function DatePicker(field) {
     		'<div class="date" data-bind="text: date"></div>',
     		'<div class="year" data-bind="text: year"></div>',
     	'</section>',
-    	'<section class="calendar">',
+    	'<section class="calendar no-select">',
     		'<a data-bind="click: prevMonth" class="control prev"> &#xf053 </a>',
     		'<a data-bind="click: nextMonth" class="control next"> &#xf054 </a>',
     		'<div class="title" data-bind="text: viewingMonthName() + \' \' + viewingYear()"></div>',
@@ -27,7 +27,7 @@ function DatePicker(field) {
     			'<a data-bind="css:{ selected: $parent.isSelected($data), today: $parent.isToday($data) },text: $data, click: function(data,event){ $parent.chooseDate(data) }" class="day" data-bind="text: $data"></a>',
     		'</div>',
     	'</section>',
-    	'<section class="button-container">',
+    	'<section class="no-select button-container">',
     		'<a class="close" data-bind="click: closePicker">OK</a>',
     	'</section>',
 	'</div>'
@@ -53,6 +53,7 @@ function DatePicker(field) {
 			'T', 'F', 'S'
 		];
 
+		// get date from field or get todays date
 		self.field = field;
 		var datePickerValue = new Date ($(field).val());
 		if (datePickerValue == "Invalid Date") {
@@ -168,31 +169,13 @@ function DatePicker(field) {
 
 	    self.buildMonthStruct();
 	}
-	var viewModel = new AppViewModel(field, picker);
-	ko.applyBindings(viewModel, picker[0]);
-}
-
-function Month(number, year) {
-	var names = [
-		'January', 'February', 'March', 'April', 'May',
-		'June', 'July', 'August', 'September', 'October',
-		'November', 'December'
-	];
-	var days = [
-		'Sunday', 'Monday', 'Tuesday', 'Wedneday',
-		'Thursday', 'Friday', 'Saturday'
-	];
-	this.number = number;
-	this.year = year
-	this.name = names[this.number - 1];
-	this.days = new Date(year, number, 0).getDate();
-	this.startDay = days[new Date(this.name + " 1 " + year).getDay()];
+	ko.applyBindings(new AppViewModel(field, picker), picker[0]);
 }
 
 var days = [
-			'Sunday', 'Monday', 'Tuesday', 'Wedneday',
-			'Thursday', 'Friday', 'Saturday'
-		];
+	'Sunday', 'Monday', 'Tuesday', 'Wedneday',
+	'Thursday', 'Friday', 'Saturday'
+];
 
 var months = [
 	'January', 'February', 'March', 'April', 'May',
@@ -205,3 +188,12 @@ var monthShort = [
 	'June', 'July', 'Aug', 'Sept', 'Oct',
 	'Nov', 'Dec'
 ];
+
+function Month(number, year) {
+	this.number = number;
+	this.year = year
+	this.name = months[this.number - 1];
+	this.days = new Date(year, number, 0).getDate();
+	this.startDay = days[new Date(this.name + " 1 " + year).getDay()];
+}
+
