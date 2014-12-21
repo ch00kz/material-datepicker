@@ -2,7 +2,7 @@
 
 Datepicker (screenshot below) inspired by material design's pickers (http://www.google.com/design/spec/components/pickers.html) 
 
-![alt tag](http://i.imgur.com/0i6PMMB.png)
+![Imgur](http://i.imgur.com/0UpiN52.png)
 
 ##Dependencies
 * JQuery
