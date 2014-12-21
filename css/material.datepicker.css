@@ -30,6 +30,7 @@
 	font-family: Roboto;
 	position: absolute;
 	width: 280px;
+	background: #fff;
 	border:1px solid gray;
 	z-index: 1000000;
 }
