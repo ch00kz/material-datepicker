@@ -14,13 +14,15 @@ function DatePicker(field) {
     		'<a data-bind="click: prevMonth" class="control prev"> &#xf053 </a>',
     		'<a data-bind="click: nextMonth" class="control next"> &#xf054 </a>',
     		'<div class="title" data-bind="text: viewingMonthName() + \' \' + viewingYear()"></div>',
-    		'<span class="day">S</span>',
-    		'<span class="day">M</span>',
-    		'<span class="day">T</span>',
-    		'<span class="day">W</span>',
-    		'<span class="day">T</span>',
-    		'<span class="day">F</span>',
-    		'<span class="day">S</span>',
+    		'<div class="headings">',
+	    		'<span class="day heading">S</span>',
+	    		'<span class="day heading">M</span>',
+	    		'<span class="day heading">T</span>',
+	    		'<span class="day heading">W</span>',
+	    		'<span class="day heading">T</span>',
+	    		'<span class="day heading">F</span>',
+	    		'<span class="day heading">S</span>',
+	    	'</div>',
     		'<div class="days" data-bind="foreach : monthStruct()">',
     			'<a data-bind="css:{ selected: $parent.isSelected($data), today: $parent.isToday($data) },text: $data, click: function(data,event){ $parent.chooseDate(data) }" class="day" data-bind="text: $data"></a>',
     		'</div>',
@@ -153,7 +155,7 @@ function DatePicker(field) {
 	    	var day = 1;
 	    	for(var i = 0; i < 50 ; i++){
 	    		if (i < startDay) {
-	    			self.monthStruct.push(" ");
+	    			self.monthStruct.push("");
 	    		}
 	    		else {
 	    			if(day <= month.days){
