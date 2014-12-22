@@ -35,9 +35,13 @@ function DatePicker(field) {
 
 	var picker = $(html);
 	$(field).after(picker);
+
 	$(field).focus(function(){
 		picker.removeClass('hide');
 	});
+
+
+
 
 	var fieldHeight = $(field).height();
 	var offsetTop = $(field).offset().top + fieldHeight + 10;
@@ -55,10 +59,14 @@ function DatePicker(field) {
 
 		// get date from field or get todays date
 		self.field = field;
-		var datePickerValue = new Date ($(field).val());
-		if (datePickerValue == "Invalid Date") {
-			datePickerValue = new Date();
-		}
+		self.today = ko.observable(new Date());
+		self.datePickerValue = ko.observable();
+		self.viewingMonth = ko.observable();
+		self.viewingYear = ko.observable();
+	    self.monthStruct = ko.observableArray();
+		self.viewingMonthName = ko.computed(function(){
+	    	return months[ self.viewingMonth() - 1 ];
+	    });
 
 		self.chooseDate = function(day) {
 			if (day) {
@@ -66,22 +74,81 @@ function DatePicker(field) {
 				self.datePickerValue(new Date(date));
 				var year = self.viewingYear();
 				var month = self.viewingMonth();
-				var dateString = year + "-" + month + "-" + day;
+				var dateString = day + "/" + month + "/" + year;
 				$(self.field).val(dateString);
 			}
 		};
 
-		self.closePicker = function(){
-			picker.addClass('hide');
+		self.setupViewingDates = function() {
+			self.viewingYear(self.datePickerValue().getFullYear());
+			self.viewingMonth(self.datePickerValue().getMonth() + 1);
 		}
 
-		self.today = ko.observable(new Date());
-	    self.datePickerValue = ko.observable(datePickerValue);
-	    self.viewingMonth = ko.observable(datePickerValue.getMonth() + 1);
-	    self.viewingMonthName = ko.computed(function(){
-	    	return months[self.viewingMonth() - 1];
-	    });
-	    self.viewingYear = ko.observable(datePickerValue.getFullYear());
+		self.buildMonthStruct = function(){
+	    	self.monthStruct.removeAll();
+	    	var monthNum = self.viewingMonth();
+	    	var year = self.viewingYear();
+	    	var month = new Month(monthNum, year);
+	    	var dayToNum = {
+	    		"Sunday": 0,
+	    		"Monday": 1,
+	    		"Tuesday": 2,
+	    		"Wednesday": 3,
+	    		"Thursday": 4,
+	    		"Friday": 5,
+	    		"Saturday": 6,
+	    	};
+	    	var startDay = dayToNum[month.startDay];
+	    	var day = 1;
+	    	for(var i = 0; i < 50 ; i++){
+	    		if (i < startDay) {
+	    			self.monthStruct.push("");
+	    		}
+	    		else {
+	    			if(day <= month.days){
+		    			self.monthStruct.push(day);
+	    			}
+	    			day++;
+	    		}
+	    	}
+	    };
+
+		self.fetchDateFromField = function(){
+			var dateString = $(field).val();
+			if (dateString){
+				dateString = dateString.split("/");
+			}
+			var day = dateString[0], month = dateString[1] - 1, year = dateString[2];
+			self.datePickerValue( new Date( year,month,day ) );
+			if (self.datePickerValue() == "Invalid Date") {
+				self.datePickerValue( new Date() );
+			}
+			self.setupViewingDates();
+			self.buildMonthStruct();
+		};
+
+		$(field).keyup(function(){
+			self.fetchDateFromField();
+		});
+
+
+
+		$(field).focus(function(){
+			self.fetchDateFromField();
+			self.chooseDate(self.datePickerValue().getDate());
+		});
+
+		$(field).focusout(function(){
+			self.fetchDateFromField();
+			self.chooseDate(self.datePickerValue().getDate());
+		});
+
+		   // init function
+		self.init = function() {
+			self.fetchDateFromField();
+		};
+
+		self.init();
 
 	    self.nextMonth = function() {
 	    	if (self.viewingMonth() < 12){
@@ -136,40 +203,14 @@ function DatePicker(field) {
 	    	return self.datePickerValue().getFullYear();
 	    });
 
-	    self.monthStruct = ko.observableArray();
-
-	    self.buildMonthStruct = function(){
-	    	self.monthStruct.removeAll();
-	    	var monthNum = self.viewingMonth();
-	    	var year = self.viewingYear();
-	    	var month = new Month(monthNum, year);
-	    	var dayToNum = {
-	    		"Sunday": 0,
-	    		"Monday": 1,
-	    		"Tuesday": 2,
-	    		"Wednesday": 3,
-	    		"Thursday": 4,
-	    		"Friday": 5,
-	    		"Saturday": 6,
-	    	};
-	    	var startDay = dayToNum[month.startDay];
-	    	var day = 1;
-	    	for(var i = 0; i < 50 ; i++){
-	    		if (i < startDay) {
-	    			self.monthStruct.push("");
-	    		}
-	    		else {
-	    			if(day <= month.days){
-		    			self.monthStruct.push(day);
-	    			}
-	    			day++;
-	    		}
-	    	}
-	    };
-
-	    self.buildMonthStruct();
+		self.closePicker = function(){
+			picker.addClass('hide');
+		}
+   		self.buildMonthStruct();
 	}
-	ko.applyBindings(new AppViewModel(field, picker), picker[0]);
+	var viewModel = new AppViewModel(field, picker);
+	window.viewModel = viewModel;
+	ko.applyBindings(viewModel, picker[0]);
 }
 
 var days = [
