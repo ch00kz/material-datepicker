@@ -35,7 +35,7 @@ A datepicker (https://vimeo.com/115088510 & screenshot below) inspired by materi
 ```
 
 ##To Do
-* Allow for specification of date format
+* Allow for specification of options (eg. format of date string, date ranges etc)
 * Add time picker
 
 
