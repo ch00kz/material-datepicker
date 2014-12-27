@@ -115,7 +115,6 @@ function DatePicker(field, options) {
 
 		self.fetchDateFromField = function(){
 			var dateString = $(field).val();
-			console.log("dateString is ", dateString);
 			if (dateString){
 				self.datePickerValue( moment(dateString, self.dateFormat) );
 			}
