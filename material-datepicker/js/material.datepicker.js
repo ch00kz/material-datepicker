@@ -200,9 +200,3 @@ var months = [
 	'June', 'July', 'August', 'September', 'October',
 	'November', 'December'
 ];
-
-var monthShort = [
-	'Jan', 'Feb', 'Mar', 'Apr', 'May',
-	'June', 'July', 'Aug', 'Sept', 'Oct',
-	'Nov', 'Dec'
-];
