@@ -49,7 +49,6 @@ function DatePicker(field, options) {
 			'T', 'F', 'S'
 		];
 
-		// get date from field or get todays date
 		self.field = field;
 
 		self.dateFormat = options ? options.format : "DD/MM/YYYY";
@@ -80,26 +79,19 @@ function DatePicker(field, options) {
 
 		self.buildMonthStruct = function(){
 	    	self.monthStruct.removeAll();
-	    	var monthNum = self.viewingMonth();
+	    	var month = self.viewingMonth();
 	    	var year = self.viewingYear();
-	    	var month = new Month(monthNum, year);
-	    	var dayToNum = {
-	    		"Sunday": 0,
-	    		"Monday": 1,
-	    		"Tuesday": 2,
-	    		"Wednesday": 3,
-	    		"Thursday": 4,
-	    		"Friday": 5,
-	    		"Saturday": 6,
-	    	};
-	    	var startDay = dayToNum[month.startDay];
+	    	var startOfMonth = moment(month + "-1-" + year, "MM-DD-YYYY").startOf('month');
+	    	var startDay = startOfMonth.format('dddd');
+	    	var startingPoint = startOfMonth.day();
+	    	var daysInMonth = startOfMonth.endOf('month').date();
 	    	var day = 1;
-	    	for(var i = 0; i < 50 ; i++){
-	    		if (i < startDay) {
+	    	for(var i = 0 ; i < 50 ; i++){
+	    		if (i < startingPoint) {
 	    			self.monthStruct.push("");
 	    		}
 	    		else {
-	    			if(day <= month.days){
+	    			if(day <= daysInMonth){
 		    			self.monthStruct.push(day);
 	    			}
 	    			day++;
@@ -177,11 +169,11 @@ function DatePicker(field, options) {
 	    });
 
 	    self.month = ko.computed(function(){
-	    	return months[self.datePickerValue().month()];
+	    	return self.datePickerValue().format("MMMM");
 	    });
 
 	    self.shortMonth = ko.computed(function(){
-	    	return monthShort[self.datePickerValue().month()];
+	    	return self.datePickerValue().format("MMM");
 	    });
 
 	    self.year = ko.computed(function(){
@@ -214,12 +206,3 @@ var monthShort = [
 	'June', 'July', 'Aug', 'Sept', 'Oct',
 	'Nov', 'Dec'
 ];
-
-function Month(number, year) {
-	this.number = number;
-	this.year = year
-	this.name = months[this.number - 1];
-	this.days = new Date(year, number, 0).getDate();
-	this.startDay = days[new Date(this.name + " 1 " + year).getDay()];
-}
-
