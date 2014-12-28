@@ -1,4 +1,5 @@
 function DatePicker(field, options) {
+
 	var html =
    	[
 	   	'<div class="material-datepicker hide">',
@@ -28,18 +29,29 @@ function DatePicker(field, options) {
    	].join('\n');
 
 	var picker = $(html);
+
+
+	// insert picker after the field in the DOM
 	$(field).after(picker);
 
+	// show picker when field is in focus
 	$(field).focus(function(){
 		picker.removeClass('hide');
 	});
 
-
+	// setup picker position in relation to the field
 	var fieldHeight = $(field).height();
 	var offsetTop = $(field).offset().top + fieldHeight + 10;
 	var offsetLeft = $(field).offset().left;
 	picker.css('top', offsetTop);
 	picker.css('left', offsetLeft);
+
+	// setup option values
+	var defaults = {
+		format: "DD/MM/YYYY",
+		colour: "#009688"
+	};
+	var options = $.extend(options, defaults);
 
 	function AppViewModel(field, picker, options) {
 		var self = this;
@@ -51,15 +63,26 @@ function DatePicker(field, options) {
 
 		self.field = field;
 
-		self.dateFormat = options ? options.format : "DD/MM/YYYY";
+
+
+		self.dateFormat = options ? options.format : defaults.format;
 		self.today = ko.observable( moment() );
 		self.datePickerValue = ko.observable();
 		self.viewingMonth = ko.observable();
 		self.viewingYear = ko.observable();
 	    self.monthStruct = ko.observableArray();
 		self.viewingMonthName = ko.computed(function(){
+			var months = [
+				'January', 'February', 'March', 'April', 'May',
+				'June', 'July', 'August', 'September', 'October',
+				'November', 'December'
+			];
 	    	return months[ self.viewingMonth() - 1 ];
 	    });
+
+	    self.closePicker = function(){
+			picker.addClass('hide');
+		};
 
 		self.chooseDate = function(day) {
 			if (day) {
@@ -81,7 +104,7 @@ function DatePicker(field, options) {
 	    	self.monthStruct.removeAll();
 	    	var month = self.viewingMonth();
 	    	var year = self.viewingYear();
-	    	var startOfMonth = moment(month + "-1-" + year, "MM-DD-YYYY").startOf('month');
+	    	var startOfMonth = moment( "1/" + month + "/" + year, defaults.format).startOf('month');
 	    	var startDay = startOfMonth.format('dddd');
 	    	var startingPoint = startOfMonth.day();
 	    	var daysInMonth = startOfMonth.endOf('month').date();
@@ -161,7 +184,7 @@ function DatePicker(field, options) {
 	    };
 
 	    self.day = ko.computed(function(){
-	    	return days[self.datePickerValue().day()];
+	    	return self.datePickerValue().format('dddd');
 	    });
 
 	    self.date = ko.computed(function(){
@@ -180,23 +203,9 @@ function DatePicker(field, options) {
 	    	return self.datePickerValue().year();
 	    });
 
-		self.closePicker = function(){
-			picker.addClass('hide');
-		}
    		self.buildMonthStruct();
 	}
 	var viewModel = new AppViewModel(field, picker, options);
 	window.viewModel = viewModel;
 	ko.applyBindings(viewModel, picker[0]);
 }
-
-var days = [
-	'Sunday', 'Monday', 'Tuesday', 'Wedneday',
-	'Thursday', 'Friday', 'Saturday'
-];
-
-var months = [
-	'January', 'February', 'March', 'April', 'May',
-	'June', 'July', 'August', 'September', 'October',
-	'November', 'December'
-];
