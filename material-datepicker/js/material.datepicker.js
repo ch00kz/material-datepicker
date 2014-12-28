@@ -55,16 +55,8 @@ function DatePicker(field, options) {
 
 	function AppViewModel(field, picker, options) {
 		var self = this;
-
-		self.daysShort = [
-			'S', 'M', 'T', 'W',
-			'T', 'F', 'S'
-		];
-
+		self.daysShort = ['S', 'M', 'T', 'W','T', 'F', 'S'];
 		self.field = field;
-
-
-
 		self.dateFormat = options ? options.format : defaults.format;
 		self.today = ko.observable( moment() );
 		self.datePickerValue = ko.observable();
