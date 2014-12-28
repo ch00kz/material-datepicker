@@ -7,6 +7,7 @@ A datepicker (https://vimeo.com/115088510 & screenshot below) inspired by materi
 ##Dependencies
 * JQuery - 2.1.3 (http://jquery.com/download/)
 * KnockoutJS - 3.2.0 (http://knockoutjs.com/)
+* Moment.js - 2.8.4 (http://momentjs.com/)
 
 ##Use
 * Add the `material-datepicker` folder to your project
@@ -16,6 +17,7 @@ A datepicker (https://vimeo.com/115088510 & screenshot below) inspired by materi
 ```html
 	<head>
 		<!-- dependencies -->
+		<script src="libs/moment.min.js"></script>
 		<script src="libs/jquery-2.1.3.min.js"></script>
 		<script src="libs/knockout-3.2.0.js"></script>
 		<!-- /dependencies -->
@@ -27,15 +29,38 @@ A datepicker (https://vimeo.com/115088510 & screenshot below) inspired by materi
 * Initialize material-datepicker on an input field.
 
 ```html
-  <input style="font-size:16px;height:30px;border-radius:2px;border:1 solid gray;padding:0px 10px">
+  <input id="one" style="font-size:16px;height:30px;border-radius:2px;border:1 solid gray;padding:0px 10px">
 ```
 
 ```javascript
-  var setupPicker = new DatePicker( $('input')[0] );
+  var options = {};
+  var picker = new DatePicker( $('#one'), options );
 ```
 
+###Options
+
+The default options are:
+
+| Option     | Default       |
+|------------|---------------|
+| `format`   | `"DD/MM/YYYY"`|
+
+| Input        | Example        | Description                                            |
+| :----------: |:--------------:| :----------------------------------------------------: |
+|YYYY	       | 2014	        | 4 digit year                                           |
+|YY	       |14	        | 2 digit year                                           |
+|Q	       |1..4	        | Quarter of year. Sets month to first month in quarter. |
+|M MM	       |1..12	        | Month number                                           |
+|MMM MMMM      | January..Dec   | Month name in locale set by moment.locale()            |
+|D DD          | 1..31	        | Day of month                                           |
+|Do            | 1st..31st	| Day of month with ordinal                              |
+|DDD DDDD      | 1..365	        | Day of year                                            |
+|X             | 1410715640.579	| Unix timestamp                                         |
+|x             | 1410715640579	| Unix ms timestamp                                      |
+
+
 ##To Do
-* Allow for specification of options (eg. format of date string, date ranges etc)
+* Add more options (eg. format of date string, date ranges, colour of picker etc)
 * Add time picker
 
 
