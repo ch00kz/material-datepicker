@@ -61,9 +61,9 @@ Date format options (see http://momentjs.com/docs/#/parsing/string-format/)
 |x             | 1410715640579	| Unix ms timestamp                                      |
 
 
-##To Do (add options for)
-* ~~ Format of date string~~
-* Date ranges
+##To Do (feature checklist)
+* ~~Format of date string~~
+* Limit Date Range
 * Change base colour of picker
 * Time picker
 
