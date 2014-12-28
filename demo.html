@@ -7,12 +7,9 @@
 		<link rel="stylesheet" type="text/css" href="material-datepicker/css/material.datepicker.css">
 	</head>
 	<body>
-		<input style="font-size:16px;height: 30px;border-radius: 2px;border:1 solid gray;padding:0px 10px"><br><br>
-		<!-- <input style="font-size:16px;height: 30px;border-radius: 2px;border:1 solid gray;padding:0px 10px"><br><br> -->
-		</div>
+		<input id="one" style="font-size:16px;height:30px;border-radius:2px;border:1 solid gray;padding:0px 10px"><br><br>
 		<script>
-			var setupPicker = new DatePicker( $('input')[0], { format: "DD ~ MM ~ YYYY"} );
-			// var setupPicker = new DatePicker( $('input')[1], {} );
+			var picker = new DatePicker( $('#one') );
 		</script>
 	</body>
 </html>

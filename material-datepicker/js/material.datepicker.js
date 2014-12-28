@@ -58,7 +58,7 @@ function DatePicker(field, options) {
 		// get date from field or get todays date
 		self.field = field;
 
-		self.dateFormat = options ? options.format : "DD - MM - YYYY";
+		self.dateFormat = options ? options.format : "DD/MM/YYYY";
 		self.today = ko.observable( moment() );
 		self.datePickerValue = ko.observable();
 		self.viewingMonth = ko.observable();
