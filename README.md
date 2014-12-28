@@ -1,6 +1,6 @@
 ##material-datepicker
 
-A datepicker (https://vimeo.com/115088510 & screenshot below) inspired by material design's pickers (http://www.google.com/design/spec/components/pickers.html) 
+A datepicker (https://vimeo.com/115088510 & screenshot below) inspired by material design's pickers, using Moment.js  (http://www.google.com/design/spec/components/pickers.html) 
 
 ![Imgur](http://i.imgur.com/0UpiN52.png?1)
 
@@ -45,6 +45,8 @@ The default options are:
 |------------|---------------|
 | `format`   | `"DD/MM/YYYY"`|
 
+Date format options (see http://momentjs.com/docs/#/parsing/string-format/)
+
 | Input        | Example        | Description                                            |
 | :----------: |:--------------:| :----------------------------------------------------: |
 |YYYY	       | 2014	        | 4 digit year                                           |
@@ -59,9 +61,11 @@ The default options are:
 |x             | 1410715640579	| Unix ms timestamp                                      |
 
 
-##To Do
-* Add more options (eg. format of date string, date ranges, colour of picker etc)
-* Add time picker
+##To Do (add options for)
+* ~~ Format of date string~~
+* Date ranges
+* Change base colour of picker
+* Time picker
 
 
 
