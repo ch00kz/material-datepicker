@@ -30,7 +30,6 @@ function DatePicker(field, options) {
 
 	var picker = $(html);
 
-
 	// insert picker after the field in the DOM
 	$(field).after(picker);
 
@@ -57,7 +56,7 @@ function DatePicker(field, options) {
 		var self = this;
 		self.daysShort = ['S', 'M', 'T', 'W','T', 'F', 'S'];
 		self.field = field;
-		self.dateFormat = options ? options.format : defaults.format;
+		self.options = options;
 		self.today = ko.observable( moment() );
 		self.datePickerValue = ko.observable();
 		self.viewingMonth = ko.observable();
@@ -78,11 +77,11 @@ function DatePicker(field, options) {
 
 		self.chooseDate = function(day) {
 			if (day) {
-				var date = moment( self.viewingMonth() + " " + day + " " + self.viewingYear(), "MM DD YYYY" );
+				var date = moment( day + '/' + self.viewingMonth() + '/' + self.viewingYear(), self.options.format );
 				self.datePickerValue(date);
 				var year = self.viewingYear();
 				var month = self.viewingMonth();
-		 		var dateString = self.datePickerValue().format(self.dateFormat);
+		 		var dateString = self.datePickerValue().format(self.options.format);
 				$(self.field).val(dateString);
 			}
 		};
@@ -96,7 +95,7 @@ function DatePicker(field, options) {
 	    	self.monthStruct.removeAll();
 	    	var month = self.viewingMonth();
 	    	var year = self.viewingYear();
-	    	var startOfMonth = moment( "1/" + month + "/" + year, defaults.format).startOf('month');
+	    	var startOfMonth = moment( "1/" + month + "/" + year, self.options.format).startOf('month');
 	    	var startDay = startOfMonth.format('dddd');
 	    	var startingPoint = startOfMonth.day();
 	    	var daysInMonth = startOfMonth.endOf('month').date();
@@ -117,7 +116,7 @@ function DatePicker(field, options) {
 		self.fetchDateFromField = function(){
 			var dateString = $(field).val();
 			if (dateString){
-				self.datePickerValue( moment(dateString, self.dateFormat) );
+				self.datePickerValue( moment(dateString, self.options.format) );
 			}
 			else {
 				self.datePickerValue( moment() );
