@@ -99,15 +99,9 @@ a.next {
 	right: 62px;
 }
 
-a.close {
-	float: right;
-	margin: 7px 20px 13px 0px;
-	color: #009688;
-	cursor: pointer;
-}
-
 section.calendar {
 	position: relative;
+	padding-bottom: 15px;
 }
 
 section.calendar > .title {
@@ -136,16 +130,20 @@ section.calendar .day {
 	font-weight: 300;
 }
 
-section.calendar .day.today {
+section.calendar a.day.today {
 	color: #009688;
-}
-
-section.calendar .day.selected {
-	border-radius: 40px;
-	background-color: #009688;
-	color: #fff;
 }
 
 section.calendar a.day {
 	cursor: pointer;
+	border-radius: 40px;
+}
+
+section.calendar a.day.selected {
+	background-color: #009688;
+	color: #fff;
+}
+
+section.calendar a.day:hover {
+	background-color: #EDEDED;
 }
