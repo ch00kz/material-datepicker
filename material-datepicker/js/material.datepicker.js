@@ -1,6 +1,5 @@
-function DatePicker(field, options) {
-
-	var html =
+$.fn.datepicker = function (options) {
+	var pickerHtml =
    	[
 	   	'<div class="material-datepicker hide">',
 	    	'<section class="top-day">',
@@ -22,20 +21,25 @@ function DatePicker(field, options) {
 	    			'<a data-bind="css:{ selected: $parent.isSelected($data), today: $parent.isToday($data) },text: $data, click: function(data,event){ $parent.chooseDate(data) }" class="day" data-bind="text: $data"></a>',
 	    		'</div>',
 	    	'</section>',
-	    	'<section class="no-select button-container">',
-	    		'<a class="close" data-bind="click: closePicker">OK</a>',
-	    	'</section>',
 		'</div>'
    	].join('\n');
 
-	var picker = $(html);
-
+	var field = this;
+	var picker = $(pickerHtml);
 	// insert picker after the field in the DOM
 	$(field).after(picker);
 
 	// show picker when field is in focus
 	$(field).focus(function(){
 		picker.removeClass('hide');
+	});
+
+	$(field).focusout(function(){
+		console.log("focus out");
+		if (!picker.is(":focus")) {
+			console.log("check for focus");
+			picker.removeClass('hide');
+		}
 	});
 
 	// setup picker position in relation to the field
@@ -54,11 +58,11 @@ function DatePicker(field, options) {
 
 	function AppViewModel(field, picker, options) {
 		var self = this;
-		self.daysShort = ['S', 'M', 'T', 'W','T', 'F', 'S'];
+		self.daysShort = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 		self.field = field;
 		self.options = options;
 		self.today = ko.observable( moment() );
-		self.datePickerValue = ko.observable();
+		self.datePickerValue = ko.observable( self.today() );
 		self.viewingMonth = ko.observable();
 		self.viewingYear = ko.observable();
 	    self.monthStruct = ko.observableArray();
@@ -75,7 +79,7 @@ function DatePicker(field, options) {
 			picker.addClass('hide');
 		};
 
-		self.chooseDate = function(day) {
+		self.processDate = function(day) {
 			if (day) {
 				var date = moment( day + '/' + self.viewingMonth() + '/' + self.viewingYear(), self.options.format );
 				self.datePickerValue(date);
@@ -84,6 +88,11 @@ function DatePicker(field, options) {
 		 		var dateString = self.datePickerValue().format(self.options.format);
 				$(self.field).val(dateString);
 			}
+		};
+
+		self.chooseDate = function(day) {
+			self.processDate(day);
+			self.closePicker();
 		};
 
 		self.setupViewingDates = function() {
@@ -100,7 +109,7 @@ function DatePicker(field, options) {
 	    	var startingPoint = startOfMonth.day();
 	    	var daysInMonth = startOfMonth.endOf('month').date();
 	    	var day = 1;
-	    	for(var i = 0 ; i < 50 ; i++){
+	    	for (var i = 0 ; i < 50 ; i++){
 	    		if (i < startingPoint) {
 	    			self.monthStruct.push("");
 	    		}
@@ -125,21 +134,16 @@ function DatePicker(field, options) {
 			self.buildMonthStruct();
 		};
 
+		// When Typing in the field
 		$(field).keyup(function(){
 			self.fetchDateFromField();
 		});
 
+		// When field comes into focus
 		$(field).focus(function(){
 			self.fetchDateFromField();
-			self.chooseDate(self.datePickerValue().date());
+			self.processDate(self.datePickerValue().date());
 		});
-
-		   // init function
-		self.init = function() {
-			self.fetchDateFromField();
-		};
-
-		self.init();
 
 	    self.nextMonth = function() {
 	    	if (self.viewingMonth() < 12){
@@ -194,7 +198,12 @@ function DatePicker(field, options) {
 	    	return self.datePickerValue().year();
 	    });
 
-   		self.buildMonthStruct();
+       	// init function
+		self.init = function() {
+			self.fetchDateFromField();
+   			self.buildMonthStruct();
+		};
+		self.init();
 	}
 	var viewModel = new AppViewModel(field, picker, options);
 	window.viewModel = viewModel;
