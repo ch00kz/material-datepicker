@@ -7,9 +7,10 @@
 		<link rel="stylesheet" type="text/css" href="material-datepicker/css/material.datepicker.css">
 	</head>
 	<body>
-		<input id="one" style="font-size:16px;height:30px;border-radius:2px;border:1 solid gray;padding:0px 10px"><br><br>
+		<input id="field" style="font-size:16px;height:30px;border-radius:2px;border:1 solid gray;padding:0px 10px"><br><br>
 		<script>
-			var picker = new DatePicker( $('#one') );
+			var options = {};
+			$('#field').datepicker(options);
 		</script>
 	</body>
 </html>
