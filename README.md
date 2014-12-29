@@ -26,7 +26,7 @@ A datepicker (https://vimeo.com/115088510 & screenshot below) inspired by materi
 	</head>
 ```
 
-* Initialize material-datepicker on an input field.
+* Initialize material-datepicker on an input field. (doesn't play well when the `input` field is of `type="date"`)
 
 ```html
   <input id="one" style="font-size:16px;height:30px;border-radius:2px;border:1 solid gray;padding:0px 10px">
@@ -34,12 +34,12 @@ A datepicker (https://vimeo.com/115088510 & screenshot below) inspired by materi
 
 ```javascript
   var options = {};
-  var picker = new DatePicker( $('#one'), options );
+  $('#one').datepicker(options);
 ```
 
 ###Options
 
-The default options are:
+The default option values are :
 
 | Option     | Default       |
 |------------|---------------|
