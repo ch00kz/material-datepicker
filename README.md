@@ -2,7 +2,7 @@
 
 A datepicker (https://vimeo.com/115088510 & screenshot below) inspired by material design's pickers, using Moment.js  (http://www.google.com/design/spec/components/pickers.html) 
 
-![Imgur](http://i.imgur.com/0UpiN52.png?1)
+<img height="500px" src="http://i.imgur.com/Mf7R41L.png" />
 
 ##Dependencies
 * JQuery - 2.1.3 (http://jquery.com/download/)
