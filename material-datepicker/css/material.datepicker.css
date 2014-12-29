@@ -43,6 +43,9 @@
 	border:1px solid gray;
 	z-index: 1000000;
 }
+.material-datepicker:focus {
+	outline: none;
+}
 
 .material-datepicker.hide {
 	display: none;

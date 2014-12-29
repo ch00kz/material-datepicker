@@ -1,7 +1,7 @@
 $.fn.datepicker = function (options) {
 	var pickerHtml =
    	[
-	   	'<div class="material-datepicker hide">',
+	   	'<div class="material-datepicker hide" tabindex="0">',
 	    	'<section class="top-day">',
 	    		'<span data-bind="text: day"></span>',
 	    	'</section>',
@@ -35,11 +35,20 @@ $.fn.datepicker = function (options) {
 	});
 
 	$(field).focusout(function(){
-		console.log("focus out");
-		if (!picker.is(":focus")) {
-			console.log("check for focus");
-			picker.removeClass('hide');
-		}
+		setTimeout(function() {
+			if (!picker.is(":focus")) {
+				picker.addClass('hide');
+			}
+		}, 10);
+
+	});
+
+	picker.focusout(function(){
+		setTimeout(function() {
+			if (!($(field).is(":focus"))) {
+				picker.addClass('hide');
+			}
+		}, 10);
 	});
 
 	// setup picker position in relation to the field
