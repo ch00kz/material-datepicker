@@ -95,7 +95,9 @@ $.fn.datepicker = function (options) {
 				var year = self.viewingYear();
 				var month = self.viewingMonth();
 		 		var dateString = self.datePickerValue().format(self.options.format);
-				$(self.field).val(dateString);
+				var field = $(self.field);
+				if (field.val() !== dateString)
+					field.val(dateString).change();
 			}
 		};
 
