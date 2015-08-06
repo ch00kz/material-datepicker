@@ -219,4 +219,5 @@ $.fn.datepicker = function (options) {
 	var viewModel = new AppViewModel(field, picker, options);
 	window.viewModel = viewModel;
 	ko.applyBindings(viewModel, picker[0]);
+	return this;
 }
