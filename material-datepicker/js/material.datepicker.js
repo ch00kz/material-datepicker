@@ -90,7 +90,7 @@ $.fn.datepicker = function (options) {
 
 		self.processDate = function(day) {
 			if (day) {
-				var date = moment( day + '/' + self.viewingMonth() + '/' + self.viewingYear(), self.options.format );
+				var date = moment(self.viewingYear() + '-' + self.viewingMonth() + '-' + day);
 				self.datePickerValue(date);
 				var year = self.viewingYear();
 				var month = self.viewingMonth();
