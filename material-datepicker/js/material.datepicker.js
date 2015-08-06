@@ -97,7 +97,7 @@ $.fn.datepicker = function (options) {
 		 		var dateString = self.datePickerValue().format(self.options.format);
 				var field = $(self.field);
 				if (field.val() !== dateString)
-					field.val(dateString);
+					field.val(dateString).change();
 			}
 		};
 
