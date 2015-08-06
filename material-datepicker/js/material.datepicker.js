@@ -63,7 +63,7 @@ $.fn.datepicker = function (options) {
 		format: "DD/MM/YYYY",
 		colour: "#009688"
 	};
-	var options = $.extend(options, defaults);
+	var options = $.extend(defaults, options);
 
 	function AppViewModel(field, picker, options) {
 		var self = this;
