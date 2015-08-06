@@ -63,7 +63,7 @@ $.fn.datepicker = function (options) {
 		format: "DD/MM/YYYY",
 		colour: "#009688"
 	};
-	var options = $.extend(options, defaults);
+	var options = $.extend(defaults, options);
 
 	function AppViewModel(field, picker, options) {
 		var self = this;
@@ -90,7 +90,7 @@ $.fn.datepicker = function (options) {
 
 		self.processDate = function(day) {
 			if (day) {
-				var date = moment( day + '/' + self.viewingMonth() + '/' + self.viewingYear(), self.options.format );
+				var date = moment(self.viewingYear() + '-' + self.viewingMonth() + '-' + day);
 				self.datePickerValue(date);
 				var year = self.viewingYear();
 				var month = self.viewingMonth();
@@ -113,7 +113,7 @@ $.fn.datepicker = function (options) {
 	    	self.monthStruct.removeAll();
 	    	var month = self.viewingMonth();
 	    	var year = self.viewingYear();
-	    	var startOfMonth = moment( "1/" + month + "/" + year, self.options.format).startOf('month');
+	    	var startOfMonth = moment(year + '-' + month + '-01').startOf('month');
 	    	var startDay = startOfMonth.format('dddd');
 	    	var startingPoint = startOfMonth.day();
 	    	var daysInMonth = startOfMonth.endOf('month').date();
