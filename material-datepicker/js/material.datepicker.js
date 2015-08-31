@@ -36,7 +36,7 @@ $.fn.datepicker = function (options) {
 
 	$(field).focusout(function(){
 		setTimeout(function() {
-			if (!picker.is(":focus")) {
+			if (!$(document.activeElement).closest(picker).length) {
 				picker.addClass('hide');
 			}
 		}, 10);
@@ -90,7 +90,7 @@ $.fn.datepicker = function (options) {
 
 		self.processDate = function(day) {
 			if (day) {
-				var date = moment(self.viewingYear() + '-' + self.viewingMonth() + '-' + day);
+				var date = moment(self.viewingYear() + '-' + self.viewingMonth() + '-' + day, "YYYY-MM-DD");
 				self.datePickerValue(date);
 				var year = self.viewingYear();
 				var month = self.viewingMonth();
@@ -113,7 +113,7 @@ $.fn.datepicker = function (options) {
 	    	self.monthStruct.removeAll();
 	    	var month = self.viewingMonth();
 	    	var year = self.viewingYear();
-	    	var startOfMonth = moment(year + '-' + month + '-01').startOf('month');
+	    	var startOfMonth = moment(year + '-' + month + '-01', "YYYY-MM-DD").startOf('month');
 	    	var startDay = startOfMonth.format('dddd');
 	    	var startingPoint = startOfMonth.day();
 	    	var daysInMonth = startOfMonth.endOf('month').date();
