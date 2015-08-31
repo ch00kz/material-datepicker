@@ -36,7 +36,7 @@ $.fn.datepicker = function (options) {
 
 	$(field).focusout(function(){
 		setTimeout(function() {
-			if (!picker.is(":focus")) {
+			if (!$(document.activeElement).closest(picker).length) {
 				picker.addClass('hide');
 			}
 		}, 10);
