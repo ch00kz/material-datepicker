@@ -11,12 +11,6 @@
 
 @font-face {
 	font-family: Roboto;
-	src: url('../fonts/Roboto-Semibold.ttf');
-	font-weight: 600;
-}
-
-@font-face {
-	font-family: Roboto;
 	src: url('../fonts/Roboto-Light.ttf');
 	font-weight: 300;
 }
