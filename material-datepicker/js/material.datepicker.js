@@ -1,4 +1,10 @@
 $.fn.datepicker = function (options) {
+	var pickervaluechangeKey = 'mdp.value.change';
+	var pickeropenKey = 'mdp.open';
+	var pickercloseKey = 'mdp.close';
+	var pickerdaychangeKey = 'mdp.day.change';
+	var pickernavigatemonthKey = 'mdp.navigate.month';
+
 	var pickerHtml =
    	[
 	   	'<div class="material-datepicker hide" tabindex="0">',
@@ -32,12 +38,14 @@ $.fn.datepicker = function (options) {
 	// show picker when field is in focus
 	$(field).focus(function(){
 		picker.removeClass('hide');
+		$(this).trigger(pickeropenKey);
 	});
 
 	$(field).focusout(function(){
 		setTimeout(function() {
 			if (!picker.is(":focus")) {
 				picker.addClass('hide');
+				$(field).trigger(pickercloseKey);
 			}
 		}, 10);
 
@@ -84,8 +92,9 @@ $.fn.datepicker = function (options) {
 	    	return months[ self.viewingMonth() - 1 ];
 	    });
 
-	    self.closePicker = function(){
+		self.closePicker = function(){
 			picker.addClass('hide');
+			$(self.field).trigger(pickercloseKey);
 		};
 
 		self.processDate = function(day) {
@@ -94,8 +103,12 @@ $.fn.datepicker = function (options) {
 				self.datePickerValue(date);
 				var year = self.viewingYear();
 				var month = self.viewingMonth();
-		 		var dateString = self.datePickerValue().format(self.options.format);
-				$(self.field).val(dateString);
+				var dateString = self.datePickerValue().format(self.options.format);
+				var oldvalue = $(self.field).val();
+				if (oldvalue !== dateString) {
+					$(self.field).val(dateString);
+					$(self.field).trigger(pickervaluechangeKey, [moment(oldvalue), date]);
+				}
 			}
 		};
 
@@ -162,6 +175,7 @@ $.fn.datepicker = function (options) {
 	    		self.viewingYear(self.viewingYear() + 1);
 	    	}
 	    	self.buildMonthStruct();
+	    	$(self.field).trigger(pickernavigatemonthKey, 'next');
 	    }
 
 	    self.prevMonth = function() {
@@ -172,6 +186,7 @@ $.fn.datepicker = function (options) {
 	    		self.viewingYear(self.viewingYear() - 1);
 	    	}
 	    	self.buildMonthStruct();
+	    	$(self.field).trigger(pickernavigatemonthKey, 'previous');
 	    }
 
 	    self.isToday = function(day) {
