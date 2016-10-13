@@ -113,7 +113,7 @@ $.fn.datepicker = function (options) {
 	    	self.monthStruct.removeAll();
 	    	var month = self.viewingMonth();
 	    	var year = self.viewingYear();
-	    	var startOfMonth = moment(year + '-' + month + '-01').startOf('month');
+		var startOfMonth = moment(year + '-' + ((month<10) ? '0'+month : month) + '-01').startOf('month');
 	    	var startDay = startOfMonth.format('dddd');
 	    	var startingPoint = startOfMonth.day();
 	    	var daysInMonth = startOfMonth.endOf('month').date();
